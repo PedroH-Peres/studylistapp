@@ -21,7 +21,7 @@ class StudyApp extends StatelessWidget {
       ),
       home: const InitialPage(),
       routes: {
-        '/home': (context)=>HomePage(),
+        '/home': (context)=> HomePage(),
       },
     );
   }
