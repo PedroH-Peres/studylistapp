@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 
+import '../models/study.dart';
+
 class OverviewPage extends StatelessWidget {
   const OverviewPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+
+    List<Study> studyList = [
+      Study(workTime: 5, breakTime: 1, title: "Teste")
+    ];
+
     return Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
@@ -26,7 +33,19 @@ class OverviewPage extends StatelessWidget {
                 ),
                 Padding(child: Divider(), padding: EdgeInsets.symmetric(horizontal: 18),),
                 Container(
-                  
+                  child: GestureDetector(
+                    onTap: (){
+                      studyList[0].incTotalTime(1);
+                      print(studyList[0].totalTimeofStudy);
+                    },
+                    child: Card(
+                      margin: EdgeInsets.all(10),
+                      child: ListTile(
+                        leading: Text(studyList[0].title),
+                        trailing: Text(studyList[0].workTime.toString()),
+                      ),
+                    ),
+                  ),
                 )
               ],
             ),
