@@ -8,7 +8,7 @@ class BottomNavStore = _BottomNavStore with _$BottomNavStore;
 abstract class _BottomNavStore with Store{
 
   @observable
-  int index = 0;
+  int index = 1;
 
   @action
   void changeIndex(int i){
