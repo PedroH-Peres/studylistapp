@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:studyapp/store/studyList.store.dart';
 
 import '../models/study.dart';
 
@@ -7,10 +9,8 @@ class OverviewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Study> studyList = [
-      Study(workTime: 5, breakTime: 1, title: "Teste"),
-      Study(workTime: 8, breakTime: 2, title: "Teste2", description: "Isso é uma descrição!")
-    ];
+
+    List studyList = Provider.of<StudyListStore>(context).getStudyList();
 
     return Container(
         width: MediaQuery.of(context).size.width,

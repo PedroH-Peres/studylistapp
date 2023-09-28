@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:studyapp/pages/homepage.dart';
 import 'package:studyapp/pages/initial_page.dart';
 import 'package:studyapp/store/bottomNav.store.dart';
+import 'package:studyapp/store/studyList.store.dart';
 
 void main() {
   runApp(const StudyApp());
@@ -16,7 +17,8 @@ class StudyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider<BottomNavStore>(create: (context) => BottomNavStore(),)
+        Provider<BottomNavStore>(create: (context) => BottomNavStore(),),
+        Provider<StudyListStore>(create: (context) => StudyListStore(),),
       ],
       child: MaterialApp(
         title: 'Study App',
