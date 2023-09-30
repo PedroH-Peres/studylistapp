@@ -59,9 +59,10 @@ class _StudyFormPageState extends State<StudyFormPage> {
                               width: 80,
                               child: Row(children: [
                                 IconButton(
-                                    onPressed: () {}, icon: Icon(Icons.edit)),
-                                IconButton(
-                                    onPressed: () {}, icon: Icon(Icons.delete)),
+                                    onPressed: () {
+                                      listStore.removeStudy(index);
+                                    },
+                                    icon: Icon(Icons.delete)),
                               ]),
                             )),
                       ),
@@ -71,11 +72,6 @@ class _StudyFormPageState extends State<StudyFormPage> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  listStore.addStudy(Study(
-                      workTime: 8,
-                      breakTime: 2,
-                      title: "Teste2",
-                      description: "Isso é uma descrição!"));
                   showModalBottomSheet(
                       context: context,
                       builder: (_) {

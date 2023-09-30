@@ -23,7 +23,7 @@ abstract class _StudyListStore with Store {
 
   @action
   void removeStudy(int index){
-    studyList.remove(index);
+    studyList.removeAt(index);
   }
 
   @action
