@@ -35,8 +35,8 @@ class _StudyFormState extends State<StudyForm> {
     final studyListStore = Provider.of<StudyListStore>(context);
     final _formKey = GlobalKey<FormState>();
 
-    return Scaffold(
-      body: Container(
+    return 
+      Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(color: Colors.white),
@@ -124,16 +124,12 @@ class _StudyFormState extends State<StudyForm> {
                   },
                   child: Text("Done"),
                 ),
-                TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Text("Fechar"))
+                
               ],
             ),
           ),
         ),
-      ),
+      
     );
   }
 }

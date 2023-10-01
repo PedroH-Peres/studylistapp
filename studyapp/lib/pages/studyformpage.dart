@@ -60,7 +60,8 @@ class _StudyFormPageState extends State<StudyFormPage> {
                               child: Row(children: [
                                 IconButton(
                                     onPressed: () {
-                                      Navigator.push(context, MaterialPageRoute(builder: (context)=> StudyForm(), settings: RouteSettings(arguments: listStore.studyList[index])), ).then((value) => setState((){}));
+                                      //Navigator.push(context, MaterialPageRoute(builder: (context)=> StudyForm(), settings: RouteSettings(arguments: listStore.studyList[index])), ).then((value) => setState((){}));
+                                      showModalBottomSheet(context: context, builder: (_)=> StudyForm(),  enableDrag: false, routeSettings: RouteSettings(arguments: listStore.studyList[index])).then((value) => setState((){}));
                                     },
                                     icon: Icon(Icons.edit)),
                                   IconButton(
@@ -77,7 +78,8 @@ class _StudyFormPageState extends State<StudyFormPage> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=> StudyForm()), );
+                  //Navigator.of(context).push(MaterialPageRoute(builder: (context)=> StudyForm()), );
+                  showModalBottomSheet(context: context, builder: (_)=> StudyForm(),  enableDrag: false);
                 },
                 child: Icon(Icons.add),
                 style: ElevatedButton.styleFrom(
