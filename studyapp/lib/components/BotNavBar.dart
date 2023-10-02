@@ -18,7 +18,6 @@ class StudyBottomNav extends StatelessWidget {
     return BottomNavigationBar(
       onTap: (value) {
         change(value);
-        print(index);
       },
       currentIndex: index,
       items: [

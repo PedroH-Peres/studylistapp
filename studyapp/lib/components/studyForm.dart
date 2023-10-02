@@ -47,6 +47,7 @@ class _StudyFormState extends State<StudyForm> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
+                Text("Add Study", style: TextStyle(fontSize: 24),),
                 TextFormField(
                   controller: _titleController,
                   decoration: InputDecoration(label: Text("Title")),
@@ -60,6 +61,7 @@ class _StudyFormState extends State<StudyForm> {
                 TextFormField(
                   controller: _descController,
                   decoration: InputDecoration(label: Text("Description")),
+                  maxLength: 100,
                   validator: (value) {
                     return null;
                   },
@@ -92,8 +94,20 @@ class _StudyFormState extends State<StudyForm> {
                           ),
                           keyboardType: TextInputType.number,
                           validator: (value) {
+                            if(int.tryParse(value!) == null){
+                              return "Invalid";
+                            }
+
+                            if(value != null && value.isNotEmpty){
+                              if(int.tryParse(value)! < 0){
+                                return "Invalid value";
+                              }
+                            }else{
+                              return "Required field";
+                            }   
+
                             return null;
-                          },
+                            },
                         ),
                       ),
                     ),

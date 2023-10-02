@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:studyapp/store/studyList.store.dart';
 
@@ -9,7 +10,6 @@ class OverviewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     List studyList = Provider.of<StudyListStore>(context).getStudyList();
 
     return Container(
@@ -40,7 +40,7 @@ class OverviewPage extends StatelessWidget {
               Expanded(
                 child: Container(
                   margin: EdgeInsets.all(5),
-                  padding: EdgeInsets.symmetric(horizontal: 8,vertical: 10),
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
                   child: ListView.builder(
                     itemCount: studyList.length,
                     itemBuilder: (cxt, index) => GestureDetector(
@@ -49,9 +49,27 @@ class OverviewPage extends StatelessWidget {
                         child: ListTile(
                           title: Text(studyList[index].title),
                           leading: Icon(Icons.menu_book_outlined),
-                          trailing: Text(studyList[index].workTime.toString()),
-                          subtitle: Text(studyList[index].description ??''),
-                          subtitleTextStyle: TextStyle(color: Colors.grey, fontSize: 11),
+                          trailing: Container(
+                            width: 100,
+                            height: 50,
+                            child: Observer(
+                              builder: (_)=> Row(
+                                children: [
+                                  Text(studyList[index].workTime.toString()),
+                                  IconButton(
+                                    onPressed: () {
+                                      studyList[index].pomodoroStore.setTime(5);
+                                    },
+                                    icon: Icon(Icons.start),
+                                  ),
+                                  Text(studyList[index].pomodoroStore.time.toString()),
+                                ],
+                              ),
+                            ),
+                          ),
+                          subtitle: Text(studyList[index].description ?? ''),
+                          subtitleTextStyle:
+                              TextStyle(color: Colors.grey, fontSize: 11),
                         ),
                       ),
                     ),
