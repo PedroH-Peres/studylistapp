@@ -35,7 +35,7 @@ class _StudyFormPageState extends State<StudyFormPage> {
               ),
               Expanded(
                 child: Container(
-                  margin: EdgeInsets.all(22),
+                  margin: EdgeInsets.all(12),
                   padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
                   decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 215, 174, 223),
@@ -56,7 +56,7 @@ class _StudyFormPageState extends State<StudyFormPage> {
                                 TextStyle(color: Colors.grey, fontSize: 11),
                             trailing: Container(
                               height: 50,
-                              width: 80,
+                              width: 100,
                               child: Row(children: [
                                 IconButton(
                                     onPressed: () {

@@ -13,41 +13,46 @@ class StudyForm extends StatefulWidget {
 }
 
 class _StudyFormState extends State<StudyForm> {
-  @override
-  Widget build(BuildContext context) {
+  final formKey = GlobalKey<FormState>();
+
     final TextEditingController _titleController = TextEditingController();
     final TextEditingController _descController = TextEditingController();
     final TextEditingController _workController = TextEditingController();
     final TextEditingController _breakController = TextEditingController();
     bool isEdit = false;
+  @override
+  Widget build(BuildContext context) {
+
+    
 
     final arg = ModalRoute.of(context)?.settings.arguments;
 
-      if (arg != null) {
-        final study = arg as Study;
-        isEdit = true;
-        _titleController.text = arg.title;
-        _descController.text = arg.description!;
-        _workController.text = arg.workTime.toString();
-        _breakController.text = arg.breakTime.toString();
-      }
+    if (arg != null) {
+      final study = arg as Study;
+      isEdit = true;
+      _titleController.text = arg.title;
+      _descController.text = arg.description!;
+      _workController.text = arg.workTime.toString();
+      _breakController.text = arg.breakTime.toString();
+    }
 
     final studyListStore = Provider.of<StudyListStore>(context);
-    final _formKey = GlobalKey<FormState>();
 
-    return 
-      Container(
+    return SingleChildScrollView(
+      child: Container(
         width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
+        height: MediaQuery.of(context).size.height*2/3,
         decoration: BoxDecoration(color: Colors.white),
         child: Form(
-          key: _formKey,
+          key: formKey,
           child: Container(
             padding: EdgeInsets.all(20),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Text("Add Study", style: TextStyle(fontSize: 24),),
+                const Text(
+                  "Add Study",
+                  style: TextStyle(fontSize: 24),
+                ),
                 TextFormField(
                   controller: _titleController,
                   decoration: InputDecoration(label: Text("Title")),
@@ -94,20 +99,20 @@ class _StudyFormState extends State<StudyForm> {
                           ),
                           keyboardType: TextInputType.number,
                           validator: (value) {
-                            if(int.tryParse(value!) == null){
+                            if (int.tryParse(value!) == null) {
                               return "Invalid";
                             }
 
-                            if(value != null && value.isNotEmpty){
-                              if(int.tryParse(value)! < 0){
+                            if (value != null && value.isNotEmpty) {
+                              if (int.tryParse(value)! < 0) {
                                 return "Invalid value";
                               }
-                            }else{
+                            } else {
                               return "Required field";
-                            }   
+                            }
 
                             return null;
-                            },
+                          },
                         ),
                       ),
                     ),
@@ -118,7 +123,7 @@ class _StudyFormState extends State<StudyForm> {
                 ),
                 TextButton(
                   onPressed: () {
-                    if (_formKey.currentState!.validate()) {
+                    if (formKey.currentState!.validate()) {
                       if (isEdit) {
                         var arg = ModalRoute.of(context)!.settings.arguments;
                         var study = arg as Study;
@@ -134,19 +139,17 @@ class _StudyFormState extends State<StudyForm> {
                             description: _descController.text);
                         studyListStore.addStudy(study);
                         study.setTime();
-                        
                       }
                       Navigator.of(context).pop();
                     }
                   },
                   child: Text("Done"),
                 ),
-                
               ],
             ),
           ),
         ),
-      
+      ),
     );
   }
 }

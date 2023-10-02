@@ -51,14 +51,13 @@ class OverviewPage extends StatelessWidget {
                           leading: Icon(Icons.menu_book_outlined),
                           trailing: Container(
                             alignment: Alignment.centerRight,
-                            width: 300,
+                            width: 170,
                             height: 70,
                             child: Observer(
 
                               builder: (_)=> Row(
                                 children: [
-                                  Text("TotalTime: ${studyList[index].pomodoroStore.total.toString()} "),
-                                  Text("WorkTime: ${studyList[index].workTime.toString()}"),
+                                  Text("Total: ${studyList[index].pomodoroStore.total.toString()}"),
                                   IconButton(
                                     onPressed: () {
                                       studyList[index].pomodoroStore.initTimer();
@@ -68,7 +67,7 @@ class OverviewPage extends StatelessWidget {
                                   Container(
                                     padding: EdgeInsets.all(5),
                                     decoration: BoxDecoration(color: Color.fromARGB(125, 182, 180, 180), borderRadius: BorderRadius.circular(7)),
-                                    child: Text("[${studyList[index].pomodoroStore.minutos.toString().padLeft(2, '0')}:${studyList[index].pomodoroStore.segundos.toString().padLeft(2, '0')}]", style: TextStyle(fontSize:18)),
+                                    child: Text("[${studyList[index].pomodoroStore.minutos.toString().padLeft(2, '0')}:${studyList[index].pomodoroStore.segundos.toString().padLeft(2, '0')}]", style: TextStyle(fontSize:12)),
                                   ),
                                 ],
                               ),
