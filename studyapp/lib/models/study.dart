@@ -11,8 +11,9 @@ class Study{
 
   Study({required this.workTime, required this.breakTime, required this.title, this.description});
 
-  void incTotalTime(int i){
-    totalTimeofStudy+=i;
+  void setTime(){
+    pomodoroStore.minutos = workTime;
   }
+
 
 }

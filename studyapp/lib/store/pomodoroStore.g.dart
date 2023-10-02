@@ -24,6 +24,69 @@ mixin _$PomodoroStore on _PomodoroStore, Store {
     });
   }
 
+  late final _$iniciadoAtom =
+      Atom(name: '_PomodoroStore.iniciado', context: context);
+
+  @override
+  bool get iniciado {
+    _$iniciadoAtom.reportRead();
+    return super.iniciado;
+  }
+
+  @override
+  set iniciado(bool value) {
+    _$iniciadoAtom.reportWrite(value, super.iniciado, () {
+      super.iniciado = value;
+    });
+  }
+
+  late final _$minutosAtom =
+      Atom(name: '_PomodoroStore.minutos', context: context);
+
+  @override
+  int get minutos {
+    _$minutosAtom.reportRead();
+    return super.minutos;
+  }
+
+  @override
+  set minutos(int value) {
+    _$minutosAtom.reportWrite(value, super.minutos, () {
+      super.minutos = value;
+    });
+  }
+
+  late final _$segundosAtom =
+      Atom(name: '_PomodoroStore.segundos', context: context);
+
+  @override
+  int get segundos {
+    _$segundosAtom.reportRead();
+    return super.segundos;
+  }
+
+  @override
+  set segundos(int value) {
+    _$segundosAtom.reportWrite(value, super.segundos, () {
+      super.segundos = value;
+    });
+  }
+
+  late final _$totalAtom = Atom(name: '_PomodoroStore.total', context: context);
+
+  @override
+  int get total {
+    _$totalAtom.reportRead();
+    return super.total;
+  }
+
+  @override
+  set total(int value) {
+    _$totalAtom.reportWrite(value, super.total, () {
+      super.total = value;
+    });
+  }
+
   late final _$_PomodoroStoreActionController =
       ActionController(name: '_PomodoroStore', context: context);
 
@@ -39,9 +102,24 @@ mixin _$PomodoroStore on _PomodoroStore, Store {
   }
 
   @override
+  void initTimer() {
+    final _$actionInfo = _$_PomodoroStoreActionController.startAction(
+        name: '_PomodoroStore.initTimer');
+    try {
+      return super.initTimer();
+    } finally {
+      _$_PomodoroStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
-time: ${time}
+time: ${time},
+iniciado: ${iniciado},
+minutos: ${minutos},
+segundos: ${segundos},
+total: ${total}
     ''';
   }
 }

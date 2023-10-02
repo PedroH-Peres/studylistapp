@@ -127,11 +127,14 @@ class _StudyFormState extends State<StudyForm> {
                         study.breakTime = int.tryParse(_breakController.text)!;
                         study.workTime = int.tryParse(_workController.text)!;
                       } else {
-                        studyListStore.addStudy(Study(
+                        Study study = Study(
                             workTime: int.tryParse(_workController.text)!,
                             breakTime: int.tryParse(_breakController.text)!,
                             title: _titleController.text,
-                            description: _descController.text));
+                            description: _descController.text);
+                        studyListStore.addStudy(study);
+                        study.setTime();
+                        
                       }
                       Navigator.of(context).pop();
                     }

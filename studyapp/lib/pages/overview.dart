@@ -50,19 +50,26 @@ class OverviewPage extends StatelessWidget {
                           title: Text(studyList[index].title),
                           leading: Icon(Icons.menu_book_outlined),
                           trailing: Container(
-                            width: 100,
-                            height: 50,
+                            alignment: Alignment.centerRight,
+                            width: 300,
+                            height: 70,
                             child: Observer(
+
                               builder: (_)=> Row(
                                 children: [
-                                  Text(studyList[index].workTime.toString()),
+                                  Text("TotalTime: ${studyList[index].pomodoroStore.total.toString()} "),
+                                  Text("WorkTime: ${studyList[index].workTime.toString()}"),
                                   IconButton(
                                     onPressed: () {
-                                      studyList[index].pomodoroStore.setTime(5);
+                                      studyList[index].pomodoroStore.initTimer();
                                     },
-                                    icon: Icon(Icons.start),
+                                    icon: Icon(Icons.play_arrow),
                                   ),
-                                  Text(studyList[index].pomodoroStore.time.toString()),
+                                  Container(
+                                    padding: EdgeInsets.all(5),
+                                    decoration: BoxDecoration(color: Color.fromARGB(125, 182, 180, 180), borderRadius: BorderRadius.circular(7)),
+                                    child: Text("[${studyList[index].pomodoroStore.minutos.toString().padLeft(2, '0')}:${studyList[index].pomodoroStore.segundos.toString().padLeft(2, '0')}]", style: TextStyle(fontSize:18)),
+                                  ),
                                 ],
                               ),
                             ),
