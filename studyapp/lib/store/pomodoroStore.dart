@@ -34,12 +34,12 @@ abstract class _PomodoroStore with Store{
 
   @action
   void initTimer(){
-    print("Foi");
+    if(iniciado == true) return;
+
     cronometro = Timer.periodic(Duration(milliseconds: 100), (timer) {
-      print(segundos);
+      iniciado = true;
       if(minutos == 0 && segundos ==0){
         //aqui é pra trocar o tipo de intervalo
-        print("parou");
         cronometro?.cancel();
       }else if(segundos==0){
         minutos--;
@@ -50,4 +50,17 @@ abstract class _PomodoroStore with Store{
       }
     });
   }
+
+  @action
+  void stopTimer(){
+    iniciado = false;
+    cronometro?.cancel();
+  }
+
+  @action
+  void resetTimer(){
+    stopTimer();
+    segundos = 0;
+  }
+
 }

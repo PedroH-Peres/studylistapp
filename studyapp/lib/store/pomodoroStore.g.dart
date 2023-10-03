@@ -113,6 +113,28 @@ mixin _$PomodoroStore on _PomodoroStore, Store {
   }
 
   @override
+  void stopTimer() {
+    final _$actionInfo = _$_PomodoroStoreActionController.startAction(
+        name: '_PomodoroStore.stopTimer');
+    try {
+      return super.stopTimer();
+    } finally {
+      _$_PomodoroStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void resetTimer() {
+    final _$actionInfo = _$_PomodoroStoreActionController.startAction(
+        name: '_PomodoroStore.resetTimer');
+    try {
+      return super.resetTimer();
+    } finally {
+      _$_PomodoroStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 time: ${time},

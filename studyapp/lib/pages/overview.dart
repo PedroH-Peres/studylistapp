@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
+import 'package:studyapp/pages/studyPage.dart';
 import 'package:studyapp/store/studyList.store.dart';
 
 import '../models/study.dart';
@@ -16,7 +17,7 @@ class OverviewPage extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: Container(
-          margin: EdgeInsets.all(16),
+          margin: EdgeInsets.all(12),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             color: Color.fromARGB(255, 206, 111, 223),
@@ -39,43 +40,36 @@ class OverviewPage extends StatelessWidget {
               ),
               Expanded(
                 child: Container(
-                  margin: EdgeInsets.all(5),
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+                  margin: EdgeInsets.all(1),
+                  padding: EdgeInsets.symmetric(horizontal: 2, vertical: 8),
                   child: ListView.builder(
                     itemCount: studyList.length,
                     itemBuilder: (cxt, index) => GestureDetector(
-                      onTap: null,
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (_) =>
+                                StudyPage(study: studyList[index]))).then((value) => studyList[index].pomodoroStore.stopTimer());
+                      },
                       child: Card(
-                        child: ListTile(
-                          title: Text(studyList[index].title),
-                          leading: Icon(Icons.menu_book_outlined),
-                          trailing: Container(
-                            alignment: Alignment.centerRight,
-                            width: 170,
-                            height: 70,
-                            child: Observer(
-
-                              builder: (_)=> Row(
-                                children: [
-                                  Text("Total: ${studyList[index].pomodoroStore.total.toString()}"),
-                                  IconButton(
-                                    onPressed: () {
-                                      studyList[index].pomodoroStore.initTimer();
-                                    },
-                                    icon: Icon(Icons.play_arrow),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.all(5),
-                                    decoration: BoxDecoration(color: Color.fromARGB(125, 182, 180, 180), borderRadius: BorderRadius.circular(7)),
-                                    child: Text("[${studyList[index].pomodoroStore.minutos.toString().padLeft(2, '0')}:${studyList[index].pomodoroStore.segundos.toString().padLeft(2, '0')}]", style: TextStyle(fontSize:12)),
-                                  ),
-                                ],
-                              ),
-                            ),
+                        child: Observer(
+                          builder: (_) => ListTile(
+                            title: Text(studyList[index].title),
+                            leading: Icon(Icons.menu_book_outlined),
+                            trailing: Container(
+                                  padding: EdgeInsets.all(5),
+                                  decoration: BoxDecoration(
+                                      color:
+                                          Color.fromARGB(125, 182, 180, 180),
+                                      borderRadius: BorderRadius.circular(7)),
+                                  child: Text(
+                                      "[${studyList[index].pomodoroStore.minutos.toString().padLeft(2, '0')}:${studyList[index].pomodoroStore.segundos.toString().padLeft(2, '0')}]",
+                                      style: TextStyle(fontSize: 13)),
+                                ),
+                            
+                            subtitle: Text("Work: ${studyList[index].workTime} / Break: ${studyList[index].breakTime} - [ T: ${studyList[index].pomodoroStore.total} ]"),
+                            subtitleTextStyle:
+                                TextStyle(color: Colors.grey, fontSize: 11),
                           ),
-                          subtitle: Text(studyList[index].description ?? ''),
-                          subtitleTextStyle:
-                              TextStyle(color: Colors.grey, fontSize: 11),
                         ),
                       ),
                     ),

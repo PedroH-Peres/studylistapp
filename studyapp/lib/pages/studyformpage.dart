@@ -61,10 +61,17 @@ class _StudyFormPageState extends State<StudyFormPage> {
                                 IconButton(
                                     onPressed: () {
                                       //Navigator.push(context, MaterialPageRoute(builder: (context)=> StudyForm(), settings: RouteSettings(arguments: listStore.studyList[index])), ).then((value) => setState((){}));
-                                      showModalBottomSheet(context: context, builder: (_)=> StudyForm(),  enableDrag: false, routeSettings: RouteSettings(arguments: listStore.studyList[index])).then((value) => setState((){}));
+                                      showModalBottomSheet(
+                                              context: context,
+                                              builder: (_) => StudyForm(),
+                                              enableDrag: false,
+                                              routeSettings: RouteSettings(
+                                                  arguments: listStore
+                                                      .studyList[index]))
+                                          .then((value) => setState(() {}));
                                     },
                                     icon: Icon(Icons.edit)),
-                                  IconButton(
+                                IconButton(
                                     onPressed: () {
                                       listStore.removeStudy(index);
                                     },
@@ -76,19 +83,25 @@ class _StudyFormPageState extends State<StudyFormPage> {
                   ),
                 ),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  //Navigator.of(context).push(MaterialPageRoute(builder: (context)=> StudyForm()), );
-                  showModalBottomSheet(context: context, builder: (_)=> StudyForm(),  enableDrag: false);
-                },
-                child: Icon(Icons.add),
-                style: ElevatedButton.styleFrom(
-                    minimumSize: Size(490, 50),
-                    maximumSize: Size(600, 50),
-                    backgroundColor: Color.fromARGB(255, 206, 111, 223),
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8))),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 12),
+                child: ElevatedButton(
+                  onPressed: () {
+                    //Navigator.of(context).push(MaterialPageRoute(builder: (context)=> StudyForm()), );
+                    showModalBottomSheet(
+                        context: context,
+                        builder: (_) => StudyForm(),
+                        enableDrag: false);
+                  },
+                  child: Icon(Icons.add),
+                  style: ElevatedButton.styleFrom(
+                      minimumSize: Size(490, 50),
+                      maximumSize: Size(600, 50),
+                      backgroundColor: Color.fromARGB(255, 206, 111, 223),
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8))),
+                ),
               ),
               const SizedBox(
                 height: 22,
