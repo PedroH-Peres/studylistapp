@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:studyapp/store/pomodoroStore.dart';
 
 import '../models/study.dart';
 
@@ -49,10 +50,25 @@ class StudyPage extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "${study.pomodoroStore.minutos.toString().padLeft(2, "0")}:${study.pomodoroStore.segundos.toString().padLeft(2, "0")}",
+                          study.pomodoroStore.tType == timeType.WORK ?
+                          "WORK" : "BREAK",
                           style: TextStyle(
-                            fontSize: 50,
-                            fontWeight: FontWeight.bold,
+                              color: study.pomodoroStore.tType == timeType.WORK ? Colors.purple: Colors.green,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        Container(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                          decoration: BoxDecoration(
+                              border: Border.all(width: 4, color: study.pomodoroStore.tType == timeType.WORK ? Colors.purple: Colors.green),
+                              borderRadius: BorderRadius.circular(12)),
+                          child: Text(
+                            "${study.pomodoroStore.minutos.toString().padLeft(2, "0")}:${study.pomodoroStore.segundos.toString().padLeft(2, "0")}",
+                            style: TextStyle(
+                              fontSize: 50,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                         Container(

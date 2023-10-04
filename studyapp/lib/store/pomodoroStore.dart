@@ -6,10 +6,15 @@ part 'pomodoroStore.g.dart';
 
 class PomodoroStore = _PomodoroStore with _$PomodoroStore;
 
+enum timeType{WORK, BREAK}
+
 abstract class _PomodoroStore with Store{
 
   @observable
   int time = 0;
+
+  int workTime = 0;
+  int breakTime = 0;
 
   @observable
   bool iniciado = false;
@@ -23,12 +28,11 @@ abstract class _PomodoroStore with Store{
   Timer? cronometro;
 
   @observable
+  timeType tType = timeType.WORK;
+
+  @observable
   int total = 0;
 
-  @action
-  void setTime(int value){
-    time=value;
-  }
 
   @action
   void initTimer(){
@@ -38,7 +42,7 @@ abstract class _PomodoroStore with Store{
       iniciado = true;
       if(minutos == 0 && segundos ==0){
         //aqui é pra trocar o tipo de intervalo
-        cronometro?.cancel();
+        _toggleType();
       }else if(segundos==0){
         minutos--;
         segundos = 59;
@@ -54,6 +58,17 @@ abstract class _PomodoroStore with Store{
   }
 
   @action
+  void _toggleType(){
+    if(tType == timeType.WORK){
+      tType = timeType.BREAK;
+      minutos = breakTime;
+    }else{
+      tType = timeType.WORK;
+      minutos = workTime;
+    }
+  }
+
+  @action
   void stopTimer(){
     iniciado = false;
     cronometro?.cancel();
@@ -62,6 +77,7 @@ abstract class _PomodoroStore with Store{
   @action
   void resetTimer(){
     stopTimer();
+    tType = timeType.WORK;
     segundos = 0;
   }
 

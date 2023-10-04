@@ -13,6 +13,8 @@ class Study{
 
   void setTime(){
     pomodoroStore.minutos = workTime;
+    pomodoroStore.workTime = workTime;
+    pomodoroStore.breakTime = breakTime;
   }
 
 

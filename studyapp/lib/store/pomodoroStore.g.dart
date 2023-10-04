@@ -72,6 +72,21 @@ mixin _$PomodoroStore on _PomodoroStore, Store {
     });
   }
 
+  late final _$tTypeAtom = Atom(name: '_PomodoroStore.tType', context: context);
+
+  @override
+  timeType get tType {
+    _$tTypeAtom.reportRead();
+    return super.tType;
+  }
+
+  @override
+  set tType(timeType value) {
+    _$tTypeAtom.reportWrite(value, super.tType, () {
+      super.tType = value;
+    });
+  }
+
   late final _$totalAtom = Atom(name: '_PomodoroStore.total', context: context);
 
   @override
@@ -91,22 +106,22 @@ mixin _$PomodoroStore on _PomodoroStore, Store {
       ActionController(name: '_PomodoroStore', context: context);
 
   @override
-  void setTime(int value) {
+  void initTimer() {
     final _$actionInfo = _$_PomodoroStoreActionController.startAction(
-        name: '_PomodoroStore.setTime');
+        name: '_PomodoroStore.initTimer');
     try {
-      return super.setTime(value);
+      return super.initTimer();
     } finally {
       _$_PomodoroStoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void initTimer() {
+  void _toggleType() {
     final _$actionInfo = _$_PomodoroStoreActionController.startAction(
-        name: '_PomodoroStore.initTimer');
+        name: '_PomodoroStore._toggleType');
     try {
-      return super.initTimer();
+      return super._toggleType();
     } finally {
       _$_PomodoroStoreActionController.endAction(_$actionInfo);
     }
@@ -141,6 +156,7 @@ time: ${time},
 iniciado: ${iniciado},
 minutos: ${minutos},
 segundos: ${segundos},
+tType: ${tType},
 total: ${total}
     ''';
   }
