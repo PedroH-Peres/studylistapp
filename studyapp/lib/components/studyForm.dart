@@ -41,7 +41,7 @@ class _StudyFormState extends State<StudyForm> {
     return SingleChildScrollView(
       child: Container(
         width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height*2/3,
+        height: MediaQuery.of(context).size.height*3/4,
         decoration: BoxDecoration(color: Colors.white),
         child: Form(
           key: formKey,

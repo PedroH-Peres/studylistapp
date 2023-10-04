@@ -56,8 +56,10 @@ class _StudyFormPageState extends State<StudyFormPage> {
                                 TextStyle(color: Colors.grey, fontSize: 11),
                             trailing: Container(
                               height: 50,
-                              width: 100,
-                              child: Row(children: [
+                              width: MediaQuery.of(context).size.width*2/8,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
                                 IconButton(
                                     onPressed: () {
                                       //Navigator.push(context, MaterialPageRoute(builder: (context)=> StudyForm(), settings: RouteSettings(arguments: listStore.studyList[index])), ).then((value) => setState((){}));

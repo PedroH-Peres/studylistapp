@@ -11,8 +11,6 @@ abstract class _PomodoroStore with Store{
   @observable
   int time = 0;
 
-
-
   @observable
   bool iniciado = false;
 
@@ -36,17 +34,21 @@ abstract class _PomodoroStore with Store{
   void initTimer(){
     if(iniciado == true) return;
 
-    cronometro = Timer.periodic(Duration(milliseconds: 100), (timer) {
+    cronometro = Timer.periodic(Duration(seconds: 1), (timer) {
       iniciado = true;
       if(minutos == 0 && segundos ==0){
         //aqui é pra trocar o tipo de intervalo
         cronometro?.cancel();
       }else if(segundos==0){
         minutos--;
-        total++;
         segundos = 59;
       }else{
         segundos--;
+      }
+      time++;
+      if(time >= 60){
+        time = 0;
+        total++;
       }
     });
   }
