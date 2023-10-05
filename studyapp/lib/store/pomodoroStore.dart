@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:mobx/mobx.dart';
 
 part 'pomodoroStore.g.dart';
@@ -7,6 +8,8 @@ part 'pomodoroStore.g.dart';
 class PomodoroStore = _PomodoroStore with _$PomodoroStore;
 
 enum timeType{WORK, BREAK}
+
+
 
 abstract class _PomodoroStore with Store{
 
@@ -38,7 +41,7 @@ abstract class _PomodoroStore with Store{
   void initTimer(){
     if(iniciado == true) return;
 
-    cronometro = Timer.periodic(Duration(seconds: 1), (timer) {
+    cronometro = Timer.periodic(Duration(milliseconds: 50), (timer) {
       iniciado = true;
       if(minutos == 0 && segundos ==0){
         //aqui é pra trocar o tipo de intervalo
@@ -57,8 +60,15 @@ abstract class _PomodoroStore with Store{
     });
   }
 
+
+
+
   @action
   void _toggleType(){
+    AudioPlayer player = new AudioPlayer();
+    const alarmAudioPath = "transiction.mp3";
+    player.play(AssetSource("transiction.mp3"));
+
     if(tType == timeType.WORK){
       tType = timeType.BREAK;
       minutos = breakTime;
