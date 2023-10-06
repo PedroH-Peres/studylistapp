@@ -41,7 +41,7 @@ abstract class _PomodoroStore with Store{
   void initTimer(){
     if(iniciado == true) return;
 
-    cronometro = Timer.periodic(Duration(milliseconds: 50), (timer) {
+    cronometro = Timer.periodic(Duration(seconds: 1), (timer) {
       iniciado = true;
       if(minutos == 0 && segundos ==0){
         //aqui é pra trocar o tipo de intervalo
