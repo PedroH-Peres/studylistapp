@@ -51,7 +51,7 @@ class _StudyFormState extends State<StudyForm> {
               children: [
                 const Text(
                   "Add Study",
-                  style: TextStyle(fontSize: 24),
+                  style: TextStyle(fontSize: 24, fontFamily: "Kanit"),
                 ),
                 TextFormField(
                   controller: _titleController,
