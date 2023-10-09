@@ -78,7 +78,7 @@ class _StudyFormState extends State<StudyForm> {
                         child: TextFormField(
                           controller: _workController,
                           decoration: InputDecoration(
-                            label: Text("WorkTime"),
+                            label: Text("Work Time"),
                           ),
                           keyboardType: TextInputType.number,
                           validator: (value) {
@@ -95,7 +95,7 @@ class _StudyFormState extends State<StudyForm> {
                         child: TextFormField(
                           controller: _breakController,
                           decoration: InputDecoration(
-                            label: Text("BreakTime"),
+                            label: Text("Break Time"),
                           ),
                           keyboardType: TextInputType.number,
                           validator: (value) {
