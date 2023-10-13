@@ -4,14 +4,14 @@ import 'package:studyapp/store/pomodoroStore.dart';
 
 class Study{
 
-  int id = Random().nextInt(1000000);
+  int? id = Random().nextInt(1000000);
   int workTime;
   int breakTime;
   String title;
   String? description;
   final pomodoroStore = PomodoroStore();
 
-  Study({required this.workTime, required this.breakTime, required this.title, this.description});
+  Study({this.id ,required this.workTime, required this.breakTime, required this.title, this.description});
 
   void setTime(){
     pomodoroStore.minutos = workTime;
