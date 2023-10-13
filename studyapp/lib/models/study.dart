@@ -4,7 +4,7 @@ import 'package:studyapp/store/pomodoroStore.dart';
 
 class Study{
 
-  int? id = Random().nextInt(1000000);
+  int? id;
   int workTime;
   int breakTime;
   String title;

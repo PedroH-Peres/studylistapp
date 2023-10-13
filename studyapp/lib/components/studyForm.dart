@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:studyapp/core/studydb.dart';
 import 'package:studyapp/models/study.dart';
 import 'package:studyapp/store/studyList.store.dart';
 
@@ -142,8 +141,8 @@ class _StudyFormState extends State<StudyForm> {
                             description: _descController.text);
                         studyListStore.addStudy(study);
                         study.setTime();
-                        StudyDB().insertStudy(study);
-                        print(StudyDB().studies());
+                        DB.insert('studies', study.toMap());
+                        DB.getData('studies');
                       }
                       Navigator.of(context).pop();
                     }
