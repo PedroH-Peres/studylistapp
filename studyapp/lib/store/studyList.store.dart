@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:mobx/mobx.dart';
 
+import '../core/database.dart';
 import '../models/study.dart';
 
 part 'studyList.store.g.dart';
@@ -18,6 +19,7 @@ abstract class _StudyListStore with Store {
   @action
   void addStudy(Study study){
     studyList.add(study);
+    DB.insert('studies', study.toMap());
     tamanho++;
   }
 
@@ -27,7 +29,20 @@ abstract class _StudyListStore with Store {
   }
 
   @action
-  List getStudyList(){
+  Future<List> getStudyList() async{
+
+    final _listMap = await DB.getData('studies');
+    ObservableList<Study> lista = ObservableList<Study>.of([]);
+    for (int i = 0; i < _listMap.length; i++) {
+      lista.add(
+        Study(
+            workTime: int.parse(_listMap[i]['worktime'].toString()),
+            breakTime: int.parse(_listMap[i]['breaktime'].toString()),
+            title: _listMap[i]['title'].toString(),
+            description: (_listMap[i]['description'] ?? '').toString(),)
+      );
+    }
+    studyList = lista;
     return studyList;
   }
 

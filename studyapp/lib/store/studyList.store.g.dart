@@ -41,6 +41,14 @@ mixin _$StudyListStore on _StudyListStore, Store {
     });
   }
 
+  late final _$getStudyListAsyncAction =
+      AsyncAction('_StudyListStore.getStudyList', context: context);
+
+  @override
+  Future<List<dynamic>> getStudyList() {
+    return _$getStudyListAsyncAction.run(() => super.getStudyList());
+  }
+
   late final _$_StudyListStoreActionController =
       ActionController(name: '_StudyListStore', context: context);
 
@@ -61,17 +69,6 @@ mixin _$StudyListStore on _StudyListStore, Store {
         name: '_StudyListStore.removeStudy');
     try {
       return super.removeStudy(index);
-    } finally {
-      _$_StudyListStoreActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  List<dynamic> getStudyList() {
-    final _$actionInfo = _$_StudyListStoreActionController.startAction(
-        name: '_StudyListStore.getStudyList');
-    try {
-      return super.getStudyList();
     } finally {
       _$_StudyListStoreActionController.endAction(_$actionInfo);
     }

@@ -141,8 +141,6 @@ class _StudyFormState extends State<StudyForm> {
                             description: _descController.text);
                         studyListStore.addStudy(study);
                         study.setTime();
-                        DB.insert('studies', study.toMap());
-                        DB.getData('studies');
                       }
                       Navigator.of(context).pop();
                     }
