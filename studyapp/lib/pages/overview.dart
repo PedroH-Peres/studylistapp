@@ -16,7 +16,7 @@ class OverviewPage extends StatelessWidget {
     
     Future<List> getStudyList(){
     return Provider.of<StudyListStore>(context).getStudyList();
-  }
+    }
 
     return Container(
         width: MediaQuery.of(context).size.width,
@@ -57,7 +57,9 @@ class OverviewPage extends StatelessWidget {
                       }
                       return ListView.builder(
                       itemCount: snapshot.data?.length,
-                      itemBuilder: (cxt, index) => GestureDetector(
+                      itemBuilder: (cxt, index) { 
+                        snapshot.data?[index].setTime();
+                        return GestureDetector(
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (_) =>
@@ -85,7 +87,7 @@ class OverviewPage extends StatelessWidget {
                             ),
                           ),
                         ),
-                      ),
+                      );},
                     );}
                   ),
                 ),

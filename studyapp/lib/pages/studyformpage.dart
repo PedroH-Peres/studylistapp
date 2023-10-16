@@ -41,46 +41,57 @@ class _StudyFormPageState extends State<StudyFormPage> {
                     color: const Color.fromARGB(255, 215, 174, 223),
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    itemCount: listStore.studyList.length,
-                    itemBuilder: (cxt, index) => GestureDetector(
-                      onTap: null,
-                      child: Card(
-                        child: ListTile(
-                            title: Text(listStore.studyList[index].title),
-                            leading: Icon(Icons.menu_book_outlined),
-                            subtitle: Text(
-                                listStore.studyList[index].description ?? ''),
-                            subtitleTextStyle:
-                                TextStyle(color: Colors.grey, fontSize: 11),
-                            trailing: Container(
-                              height: 50,
-                              width: MediaQuery.of(context).size.width*2/8,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                IconButton(
-                                    onPressed: () {
-                                      //Navigator.push(context, MaterialPageRoute(builder: (context)=> StudyForm(), settings: RouteSettings(arguments: listStore.studyList[index])), ).then((value) => setState((){}));
-                                      showModalBottomSheet(
-                                              context: context,
-                                              builder: (_) => StudyForm(),
-                                              enableDrag: false,
-                                              routeSettings: RouteSettings(
-                                                  arguments: listStore
-                                                      .studyList[index]))
-                                          .then((value) => setState(() {}));
-                                    },
-                                    icon: Icon(Icons.edit)),
-                                IconButton(
-                                    onPressed: () {
-                                      listStore.removeStudy(index);
-                                    },
-                                    icon: Icon(Icons.delete)),
-                              ]),
-                            )),
-                      ),
+                  child: Observer(
+                    builder: (_)=>FutureBuilder(
+                      future: listStore.getStudyList(),
+                      builder: (context, snapshot) { 
+                        if (snapshot.connectionState == ConnectionState.none &&
+                            snapshot.hasData == null) {
+                          //print('project snapshot data is: ${projectSnap.data}');
+                          return Container(child: Center(child: CircularProgressIndicator(),),);
+                        }
+                        return ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        itemCount: listStore.studyList.length,
+                        itemBuilder: (cxt, index) => GestureDetector(
+                          onTap: null,
+                          child: Card(
+                            child: ListTile(
+                                title: Text(listStore.studyList[index].title),
+                                leading: Icon(Icons.menu_book_outlined),
+                                subtitle: Text(
+                                    listStore.studyList[index].description ?? ''),
+                                subtitleTextStyle:
+                                    TextStyle(color: Colors.grey, fontSize: 11),
+                                trailing: Container(
+                                  height: 50,
+                                  width: MediaQuery.of(context).size.width*2/8,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                    IconButton(
+                                        onPressed: () {
+                                          //Navigator.push(context, MaterialPageRoute(builder: (context)=> StudyForm(), settings: RouteSettings(arguments: listStore.studyList[index])), ).then((value) => setState((){}));
+                                          showModalBottomSheet(
+                                                  context: context,
+                                                  builder: (_) => StudyForm(),
+                                                  enableDrag: false,
+                                                  routeSettings: RouteSettings(
+                                                      arguments: listStore
+                                                          .studyList[index]))
+                                              .then((value) => setState(() {}));
+                                        },
+                                        icon: Icon(Icons.edit)),
+                                    IconButton(
+                                        onPressed: () {
+                                          listStore.removeStudy(index);
+                                        },
+                                        icon: Icon(Icons.delete)),
+                                  ]),
+                                )),
+                          ),
+                        ),
+                      );}
                     ),
                   ),
                 ),
