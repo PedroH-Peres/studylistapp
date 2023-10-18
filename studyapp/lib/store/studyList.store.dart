@@ -10,6 +10,8 @@ class StudyListStore = _StudyListStore with _$StudyListStore;
 
 abstract class _StudyListStore with Store {
 
+  
+
   @observable
   ObservableList<Study> studyList = ObservableList<Study>.of([]);
 

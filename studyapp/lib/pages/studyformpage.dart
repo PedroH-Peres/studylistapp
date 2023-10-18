@@ -41,16 +41,16 @@ class _StudyFormPageState extends State<StudyFormPage> {
                     color: const Color.fromARGB(255, 215, 174, 223),
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: Observer(
-                    builder: (_)=>FutureBuilder(
-                      future: listStore.getStudyList(),
-                      builder: (context, snapshot) { 
-                        if (snapshot.connectionState == ConnectionState.none &&
-                            snapshot.hasData == null) {
-                          //print('project snapshot data is: ${projectSnap.data}');
-                          return Container(child: Center(child: CircularProgressIndicator(),),);
-                        }
-                        return ListView.builder(
+                  child: FutureBuilder(
+                    future: listStore.getStudyList(),
+                    builder: (context, snapshot) { 
+                      if (snapshot.connectionState == ConnectionState.none &&
+                          snapshot.hasData == null) {
+                        //print('project snapshot data is: ${projectSnap.data}');
+                        return Container(child: Center(child: CircularProgressIndicator(),),);
+                      }
+                      return Observer(
+                        builder: (_) => ListView.builder(
                         scrollDirection: Axis.vertical,
                         itemCount: listStore.studyList.length,
                         itemBuilder: (cxt, index) => GestureDetector(
@@ -91,8 +91,8 @@ class _StudyFormPageState extends State<StudyFormPage> {
                                 )),
                           ),
                         ),
+                                          ),
                       );}
-                    ),
                   ),
                 ),
               ),

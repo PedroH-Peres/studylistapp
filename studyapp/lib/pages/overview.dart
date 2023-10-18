@@ -15,8 +15,10 @@ class OverviewPage extends StatelessWidget {
   Widget build(BuildContext context){
     
     Future<List> getStudyList(){
-    return Provider.of<StudyListStore>(context).getStudyList();
+        return Provider.of<StudyListStore>(context).getStudyList();
     }
+
+    List list = Provider.of<StudyListStore>(context).studyList;
 
     return Container(
         width: MediaQuery.of(context).size.width,
@@ -56,19 +58,19 @@ class OverviewPage extends StatelessWidget {
                         return Container();
                       }
                       return ListView.builder(
-                      itemCount: snapshot.data?.length,
+                      itemCount: list.length,
                       itemBuilder: (cxt, index) { 
-                        snapshot.data?[index].setTime();
+                        list[index].setTime();
                         return GestureDetector(
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (_) =>
-                                  StudyPage(study: snapshot.data?[index]))).then((value) => snapshot.data?[index].pomodoroStore.stopTimer());
+                                  StudyPage(study: list[index]))).then((value) => list[index].pomodoroStore.stopTimer());
                         },
                         child: Card(
                           child: Observer(
                             builder: (_) => ListTile(
-                              title: Text(snapshot.data?[index].title ?? ''),
+                              title: Text(list[index].title ?? ''),
                               leading: Icon(Icons.menu_book_outlined),
                               trailing: Container(
                                     padding: EdgeInsets.all(5),
@@ -77,11 +79,11 @@ class OverviewPage extends StatelessWidget {
                                             Color.fromARGB(125, 182, 180, 180),
                                         borderRadius: BorderRadius.circular(7)),
                                     child: Text(
-                                        "[${snapshot.data?[index].pomodoroStore.minutos.toString().padLeft(2, '0')}:${snapshot.data?[index].pomodoroStore.segundos.toString().padLeft(2, '0')}]",
+                                        "[${list[index].pomodoroStore.minutos.toString().padLeft(2, '0')}:${list[index].pomodoroStore.segundos.toString().padLeft(2, '0')}]",
                                         style: TextStyle(fontSize: 13)),
                                   ),
                               
-                              subtitle: Text("Work: ${snapshot.data?[index].workTime} / Break: ${snapshot.data?[index].breakTime} - [ T: ${snapshot.data?[index].pomodoroStore.total} ]"),
+                              subtitle: Text("Work: ${list[index].workTime} / Break: ${list[index].breakTime} - [ T: ${list[index].pomodoroStore.total} ]"),
                               subtitleTextStyle:
                                   TextStyle(color: Colors.grey, fontSize: 11),
                             ),
