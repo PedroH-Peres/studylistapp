@@ -26,7 +26,9 @@ abstract class _StudyListStore with Store {
   }
 
   @action
-  void removeStudy(int index){
+  removeStudy(int index) async{
+    print(studyList[index].id.toString());
+    DB.remove(studyList[index].id.toString());
     studyList.removeAt(index);
   }
 
@@ -38,6 +40,7 @@ abstract class _StudyListStore with Store {
     for (int i = 0; i < _listMap.length; i++) {
       lista.add(
         Study(
+            id: int.parse(_listMap[i]['id'].toString()),
             workTime: int.parse(_listMap[i]['worktime'].toString()),
             breakTime: int.parse(_listMap[i]['breaktime'].toString()),
             title: _listMap[i]['title'].toString(),

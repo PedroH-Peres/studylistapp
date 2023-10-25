@@ -104,7 +104,7 @@ class _StudyFormPageState extends State<StudyFormPage> {
                     showModalBottomSheet(
                         context: context,
                         builder: (_) => StudyForm(),
-                        enableDrag: false);
+                        enableDrag: false).then((value) => setState((){}));
                   },
                   child: Icon(Icons.add),
                   style: ElevatedButton.styleFrom(
