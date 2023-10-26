@@ -31,6 +31,13 @@ class DB {
     return db.query(table);
   }
 
+  static Future<void> edit(Study study) async{
+
+    final db = await DB.database();
+    await db.update('studies', study.toMap(),where: 'id = ?', whereArgs: [study.id]);
+
+  }
+
 }
 
 //CREATE TABLE studies(id INTEGER PRIMARY KEY, title TEXT, description TEXT, worktime INTEGER, breaktime INTEGER)

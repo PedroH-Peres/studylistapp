@@ -22,21 +22,24 @@ class _StudyFormState extends State<StudyForm> {
     final TextEditingController _workController = TextEditingController();
     final TextEditingController _breakController = TextEditingController();
     bool isEdit = false;
+    bool onEdit = false;
   @override
   Widget build(BuildContext context) {
 
     
-
     final arg = ModalRoute.of(context)?.settings.arguments;
 
-    if (arg != null) {
+    if (arg != null && onEdit==false) {
       final study = arg as Study;
       isEdit = true;
       _titleController.text = arg.title;
       _descController.text = arg.description!;
       _workController.text = arg.workTime.toString();
       _breakController.text = arg.breakTime.toString();
+      onEdit = true;
     }
+    
+
 
     final studyListStore = Provider.of<StudyListStore>(context);
 
@@ -133,6 +136,7 @@ class _StudyFormState extends State<StudyForm> {
                         study.description = _descController.text;
                         study.breakTime = int.tryParse(_breakController.text)!;
                         study.workTime = int.tryParse(_workController.text)!;
+                        studyListStore.edit(study);
                       } else {
                         Study study = Study(
                             workTime: int.tryParse(_workController.text)!,

@@ -33,6 +33,11 @@ abstract class _StudyListStore with Store {
   }
 
   @action
+  edit(Study study){
+    DB.edit(study);
+  }
+
+  @action
   Future<List> getStudyList() async{
 
     final _listMap = await DB.getData('studies');
