@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text("Homepage", style: TextStyle(fontFamily: "Kanit"),),
+          title: Text("P Study", style: TextStyle(fontFamily: "Kanit"),),
           elevation: 5,
         ),
         bottomNavigationBar: Observer(

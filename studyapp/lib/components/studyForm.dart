@@ -61,6 +61,7 @@ class _StudyFormState extends State<StudyForm> {
                 TextFormField(
                   controller: _titleController,
                   decoration: InputDecoration(label: Text("Title")),
+                  maxLength: 35,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "Please enter some text";
@@ -138,9 +139,13 @@ class _StudyFormState extends State<StudyForm> {
                         study.workTime = int.tryParse(_workController.text)!;
                         studyListStore.edit(study);
                       } else {
+                        int wTime = int.tryParse(_workController.text)!, bTime = int.tryParse(_breakController.text)!;
+                        if(wTime > 60) wTime = 60;
+                        if(bTime > 60) bTime = 60;
+
                         Study study = Study(
-                            workTime: int.tryParse(_workController.text)!,
-                            breakTime: int.tryParse(_breakController.text)!,
+                            workTime: wTime,
+                            breakTime: bTime,
                             title: _titleController.text,
                             description: _descController.text);
                         studyListStore.addStudy(study);
