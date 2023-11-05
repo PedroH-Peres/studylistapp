@@ -3,7 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:studyapp/components/BotNavBar.dart';
 import 'package:studyapp/pages/overview.dart';
-import 'package:studyapp/pages/pomodorocfg.dart';
+import 'package:studyapp/pages/notepage.dart';
 import 'package:studyapp/pages/studyformpage.dart';
 import 'package:studyapp/store/bottomNav.store.dart';
 

@@ -23,7 +23,7 @@ class StudyBottomNav extends StatelessWidget {
       items: [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
         BottomNavigationBarItem(icon: Icon(Icons.add), label: "Add"),
-        BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Settings"),
+        BottomNavigationBarItem(icon: Icon(Icons.notes), label: "Notes"),
       ],
     );
   }
