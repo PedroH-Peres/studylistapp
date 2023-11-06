@@ -15,19 +15,21 @@ class PomodoroPage extends StatelessWidget {
           ),
           Expanded(
             child: Container(
-              padding: EdgeInsets.all(8),
+                padding: EdgeInsets.all(8),
                 child: TextFormField(
-              maxLength: 2000,
-              maxLines: 40,
-              decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                      width: 1, color: Colors.black), //<-- SEE HERE
-                ),
-              ),
-            )),
+                  maxLength: 2000,
+                  maxLines: 40,
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 1, color: Colors.black), //<-- SEE HERE
+                    ),
+                  ),
+                )),
           ),
+          TextButton(onPressed: (){}, child: Text("Save", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),)),
           SizedBox(height: 20,)
+
         ],
       ),
     );
