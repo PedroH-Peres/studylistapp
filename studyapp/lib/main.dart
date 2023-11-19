@@ -21,7 +21,7 @@ class StudyApp extends StatelessWidget {
         Provider<StudyListStore>(create: (context) => StudyListStore(),),
       ],
       child: MaterialApp(
-        title: 'Study App',
+        title: 'Study List',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
