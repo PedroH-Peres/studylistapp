@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:studyapp/store/studyList.store.dart';
 
-class PomodoroPage extends StatelessWidget {
+class PomodoroPage extends StatefulWidget {
   PomodoroPage({super.key});
 
+  @override
+  State<PomodoroPage> createState() => _PomodoroPageState();
+}
+
+class _PomodoroPageState extends State<PomodoroPage> {
   TextEditingController notecontroller = TextEditingController();
 
-  Future<String> getText() async{
-    final nota = await StudyListStore().getNotes();
-    return nota;
-  }
+  
 
   @override
   Widget build(BuildContext context) {
+    final studyListStore = Provider.of<StudyListStore>(context);
 
-    if(notecontroller.text.isEmpty){
-    }
-    
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -30,20 +31,30 @@ class PomodoroPage extends StatelessWidget {
           Expanded(
             child: Container(
                 padding: EdgeInsets.all(8),
-                child: Observer(builder: (_)=> TextFormField(
-                  controller: notecontroller,
-                  maxLength: 2000,
-                  maxLines: 40,
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          width: 1, color: Colors.black), //<-- SEE HERE
+                child: Observer(builder: (_)=> FutureBuilder(
+                  future: studyListStore.getNotes(),
+                  builder: (ctx, snapshot) { 
+
+                    if(notecontroller.text.isEmpty){
+                      notecontroller.text = snapshot.data.toString();
+                    }
+
+                    return TextFormField(
+                    controller: notecontroller,
+                    maxLength: 2000,
+                    maxLines: 40,
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            width: 1, color: Colors.black), //<-- SEE HERE
+                      ),
                     ),
-                  ),
+                  );
+                }
                 ),)),
           ),
           TextButton(onPressed: (){
-            StudyListStore().saveNotes(notecontroller.text);
+            studyListStore.saveNotes(notecontroller.text);
           }, child: Text("Save", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),)),
           SizedBox(height: 20,)
 
