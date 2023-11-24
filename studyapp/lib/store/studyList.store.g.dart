@@ -41,6 +41,22 @@ mixin _$StudyListStore on _StudyListStore, Store {
     });
   }
 
+  late final _$getNotesAsyncAction =
+      AsyncAction('_StudyListStore.getNotes', context: context);
+
+  @override
+  Future<String> getNotes() {
+    return _$getNotesAsyncAction.run(() => super.getNotes());
+  }
+
+  late final _$removeStudyAsyncAction =
+      AsyncAction('_StudyListStore.removeStudy', context: context);
+
+  @override
+  Future removeStudy(int index) {
+    return _$removeStudyAsyncAction.run(() => super.removeStudy(index));
+  }
+
   late final _$getStudyListAsyncAction =
       AsyncAction('_StudyListStore.getStudyList', context: context);
 
@@ -64,11 +80,11 @@ mixin _$StudyListStore on _StudyListStore, Store {
   }
 
   @override
-  void removeStudy(int index) {
+  dynamic edit(Study study) {
     final _$actionInfo = _$_StudyListStoreActionController.startAction(
-        name: '_StudyListStore.removeStudy');
+        name: '_StudyListStore.edit');
     try {
-      return super.removeStudy(index);
+      return super.edit(study);
     } finally {
       _$_StudyListStoreActionController.endAction(_$actionInfo);
     }

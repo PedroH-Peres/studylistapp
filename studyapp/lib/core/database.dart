@@ -11,6 +11,7 @@ class DB {
     String path = join(databasePath, 'database.db');
     return openDatabase(path,  version: 1, onCreate: (db, version) async {
       await db.execute('CREATE TABLE studies (id INTEGER PRIMARY KEY, title TEXT, description TEXT, worktime INTEGER, breaktime INTEGER)');
+      await db.execute('CREATE TABLE notes (id INTEGER PRIMARY KEY, texto TEXT)');
     },);
   }
 
@@ -29,6 +30,11 @@ class DB {
     List<Map> lista= await db.query(table);
     print(lista);
     return db.query(table);
+  }
+
+  static Future<void> updateNote(String arg) async{
+    final db = await DB.database();
+    await db.update('notes', {'id': 0, 'texto': arg},where: 'id = ?', whereArgs: [0]);
   }
 
   static Future<void> edit(Study study) async{

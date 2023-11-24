@@ -26,6 +26,28 @@ abstract class _StudyListStore with Store {
   }
 
   @action
+  Future<String> getNotes() async{
+    final _notes = await DB.getData('notes');
+    final notes;
+    if(_notes.length >= 1){
+      notes = _notes[0]['texto'] as String;
+    }else{
+      notes = '';
+    }
+    
+    return notes;
+  }
+
+  void saveNotes(String text)async{
+    final _notes = await DB.getData('notes');
+    if(_notes.isEmpty){
+      DB.insert('notes', {'id': 0, 'texto': text});
+    }else{
+      DB.updateNote(text);
+    }
+  }
+
+  @action
   removeStudy(int index) async{
     print(studyList[index].id.toString());
     DB.remove(studyList[index].id.toString());
